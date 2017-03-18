@@ -1,0 +1,27 @@
+{
+  "name": "elasticms.eu",
+  "authors": [
+    "theus deka <me@theus.be>"
+  ],
+  "description": "Web site of the elasticms solution",
+  "main": "",
+  "keywords": [
+    "elasticms",
+    "php",
+    "symfony",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.elasticms.eu/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/bower/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "startbootstrap-modern-business": "blackrockdigital/startbootstrap-modern-business#^3.3.7"
+  }
+}
