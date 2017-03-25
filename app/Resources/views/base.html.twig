@@ -33,7 +33,6 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -122,7 +121,7 @@
 
     <!-- Page Content -->
     <div class="container">
-        <!-- Page Heading/Breadcrumbs -->
+		<!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">{% block h1_title %}{{ 'Welcome to elasticms'|trans }}{% endblock %}
@@ -158,12 +157,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('bower/startbootstrap-modern-business/js/bootstrap.min.js') }}"></script>
 
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
+
+    <script src="{{ asset('bower/matchHeight/dist/jquery.matchHeight-min.js') }}"></script>
     
     
     {% block javascripts %}{% endblock %}

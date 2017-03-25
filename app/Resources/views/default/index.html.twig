@@ -14,6 +14,8 @@
 			<p>What if we could use elasticsearch as a database?</p>
 			<p>Elasticms is "just" a backend allowing you to define content type and created/edit corresponding data. But each time that you'll saved 
 			something it will be indexed in elasticsearch.</p>
+			
+			<a href="https://github.com/ems-project/elasticms" class="btn btn-primary"><i class="fa fa-github" aria-hidden="true"></i> {{ 'Fork us on GitHub'|trans }}</a>
 		</div>
 	</div>
 	
@@ -23,201 +25,36 @@
 		<div class="col-lg-12">
 			<h1 class="page-header">{{ 'Key features'|trans|raw }}</h1>
 		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-check"></i> Migration! Always!
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p>With elasticms your content is migrated on each edition, so will never have to migrated your content again.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-gift"></i> Free &amp; Open Source
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p>Install it and enjoy your data in a powerfull search engine. Just remember that it comes without any guarantee.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
+		
+		{% for feature in features['hits']['hits'] %}
+			<div class="col-md-4">
+				<div class="panel panel-default match-height">
+					<div class="panel-heading">
+						<h4>
+							<i class="{{ feature._source.icon }}"></i> 
+							{{ attribute(feature._source, 'short_title_'~app.request.locale ) }}
+						</h4>
+					</div>
+					<div class="panel-body">
+						{{ attribute(feature._source, 'teaser_'~app.request.locale )|raw }}
+{# 						<a href="#" class="btn btn-default">Learn More</a>#}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-gears"></i> Extend it as you will
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p>Most of the functionnalities are packaged into Symfony bundles. Up to you to extend it as you will.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-database"></i> Multi-source, multi-site
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p>More than a tools, it's new way to distribute yours informative content to your web sites and apps.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Portal oriented
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p>The elasticms's architecture allow you to isolate your groups os authors into separated backends.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Indexing first
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p>How you content can be indexed should not be defined at the end of the projet. Let start by that.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Securize your data
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p></p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Files indexing
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p></p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Custom workflows
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p></p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Custom workflows
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p>Multiples envirronements.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> User-friendly backend
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p></p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Asset management
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p></p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> RESTful API
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p></p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Links with external content
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p></p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>
-						<i class="fa fa-fw fa-circle"></i> Switch with your content
-					</h4>
-				</div>
-				<div class="panel-body">
-					<p></p>
-					<a href="#" class="btn btn-default">Learn More</a>
-				</div>
-			</div>
-		</div>
+		{% endfor %}
+
 	</div>
 	<!-- /.row -->
+{% endblock %}
+
+{% block javascripts %}
+<<script type="text/javascript">
+<!--
+//-->
+
+	$(function() {
+		$('.match-height').matchHeight({});
+	});
+</script>
+
 {% endblock %}

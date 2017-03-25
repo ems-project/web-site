@@ -4,6 +4,10 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.elasticsearch:
+        class: Elasticsearch\ClientBuilder
+        factory: [AppBundle\Factories\ElasticsearchClientBuilderFactory, build]
+        arguments: ["%elasticsearch_cluster%"]
+    app.data:
+        class: AppBundle\Service\DataService
+        arguments: ["@app.elasticsearch"]
