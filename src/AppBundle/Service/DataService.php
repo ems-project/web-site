@@ -53,4 +53,32 @@ class DataService
 	}
 	
 	
+	public function getDataBySlug($index, $type, $slug){
+		
+		$body = '{
+			   "query": {
+			      "bool": {
+			         "must": [
+			            {
+			               "term": {
+			                  "slug": {
+			                     "value": '.json_encode($slug).',
+			                     "boost": 1
+			                  }
+			               }
+			            }
+			         ]
+			      }
+			   }
+			}';
+		
+		return $this->client->search([
+			'size' => 1,
+			'type' => $type,
+			'index' => $index,
+			'body' => $body,
+		]);
+	}
+	
+	
 }

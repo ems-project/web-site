@@ -31,13 +31,13 @@
 				<div class="panel panel-default match-height">
 					<div class="panel-heading">
 						<h4>
-							<i class="{{ feature._source.icon }}"></i> 
+							<i class="{{ feature._source.icon }}" aria-hidden="true"></i> 
 							{{ attribute(feature._source, 'short_title_'~app.request.locale ) }}
 						</h4>
 					</div>
 					<div class="panel-body">
 						{{ attribute(feature._source, 'teaser_'~app.request.locale )|raw }}
-{# 						<a href="#" class="btn btn-default">Learn More</a>#}
+						<a href="{{ path('data', {'type': 'feature', 'slug': feature._source.slug}) }}" class="btn btn-default">{{ 'Learn More'|trans }}<span class="sr-only"> {{ 'about %subject%'|trans({'%subject%': attribute(feature._source, 'short_title_'~app.request.locale )}) }}</span></a>
 					</div>
 				</div>
 			</div>
