@@ -21,18 +21,22 @@ class DefaultController extends AppController
     
     
     /**
-     * @Route("/{type}/{slug}", name="data")
+     * @Route("/features/{slug}", name="features")
      */
-    public function dataAction($type, $slug, Request $request)
+    public function featureAction($slug, Request $request)
     {
-    	$data = $this->getDataService()->getDataBySlug($this->getIndex(), $type, $slug);
+    	$index = $this->getIndex();
+    	$data = $this->getDataService()->getDataBySlug($index, 'feature', $slug);
     	
     	if($data['hits']['total'] != 1){
     		throw new NotFoundHttpException();
     	}
     	
-        return $this->render('type/'.$type.'.html.twig', [
+    	$features = $this->getDataService()->getFeatures($index);
+    	
+        return $this->render('type/feature.html.twig', [
         	'data' => $data['hits']['hits'][0],
+        	'features' => $features,
         ]);
     }
 }

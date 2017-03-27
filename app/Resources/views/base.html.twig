@@ -124,8 +124,8 @@
 		<!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">{% block h1_title %}{{ 'Welcome to elasticms'|trans }}{% endblock %}
-                    <small>{{ 'this is not a cms'|trans }}</small>
+                <h1 class="page-header">{% block container_title %}{{ 'Welcome to elasticms'|trans }}{% endblock %}
+                    <small>{% block container_sub_title %}{{ 'this is not a cms'|trans }}{% endblock %}</small>
                 </h1>
 {#                 <ol class="breadcrumb">#}
 {#                     <li><a href="index.html">Home</a>#}
