@@ -71,8 +71,6 @@ class DataService
 			   }
 			}';
 		
-		dump($body);
-		
 		return $this->client->search([
 				'size' => 100,
 				'type' => 'template',
