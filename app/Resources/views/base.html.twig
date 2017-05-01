@@ -18,6 +18,7 @@
 
     <!-- Custom Fonts -->
     <link href="{{ asset('bower/startbootstrap-modern-business/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">   
+    <link href="{{ asset('css/template.css') }}" rel="stylesheet">
     <link href="{{ asset('css/ems.css') }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -44,80 +45,57 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('homepage') }}"><i class="ems-icon-ball"></i> {{ 'elastic<b>ms</b>'|trans|raw }}</a>
+                <a class="navbar-brand" href="{{ path('page', {slug: 'home'}) }}"><i class="ems-icon-ball"></i> {{ 'elastic<b>ms</b>'|trans|raw }}</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-{#             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
-{#                 <ul class="nav navbar-nav navbar-right">#}
-{#                     <li>#}
-{#                         <a href="about.html">About</a>#}
-{#                     </li>#}
-{#                     <li>#}
-{#                         <a href="services.html">Services</a>#}
-{#                     </li>#}
-{#                     <li>#}
-{#                         <a href="contact.html">Contact</a>#}
-{#                     </li>#}
-{#                     <li class="dropdown">#}
-{#                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>#}
-{#                         <ul class="dropdown-menu">#}
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="{% if app.request.attributes.get('_route') starts with 'concept' %}active{% endif %}">
+                        <a href="{{ path('page', {slug: 'concept'}) }}">Concept</a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') starts with 'feature' %}active{% endif %}">
+                        <a href="{{ path('page', {slug: 'features'}) }}">Features</a>
+                    </li>
+                    <li class="dropdown {% if app.request.attributes.get('_route') starts with 'doc' %}active{% endif %}">
+                        <a href="{{ path('page', {slug: 'doc'}) }}" class="dropdown-toggle" data-toggle="dropdown">{{ 'Documentation'|trans }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ path('page', {slug: 'doc'}) }}">{{ 'Introduction'|trans }}</a>
+                            </li>
 {#                             <li>#}
-{#                                 <a href="portfolio-1-col.html">1 Column Portfolio</a>#}
+{#                                 <a href="#">{{ 'How-To guides'|trans }}</a>#}
+{#                             </li>#}
+                            <li>
+                                <a href="{{ path('page', {slug: 'doc/templates'}) }}">{{ 'Templates'|trans }}</a>
+                            </li>
+{#                             <li>#}
+{#                                 <a href="#">{{ 'Twig\'s extensions'|trans }}</a>#}
 {#                             </li>#}
 {#                             <li>#}
-{#                                 <a href="portfolio-2-col.html">2 Column Portfolio</a>#}
+{#                                 <a href="#">{{ 'Routes'|trans }}</a>#}
 {#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="portfolio-3-col.html">3 Column Portfolio</a>#}
-{#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="portfolio-4-col.html">4 Column Portfolio</a>#}
-{#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="portfolio-item.html">Single Portfolio Item</a>#}
-{#                             </li>#}
-{#                         </ul>#}
-{#                     </li>#}
-{#                     <li class="dropdown">#}
-{#                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>#}
-{#                         <ul class="dropdown-menu">#}
-{#                             <li>#}
-{#                                 <a href="blog-home-1.html">Blog Home 1</a>#}
-{#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="blog-home-2.html">Blog Home 2</a>#}
-{#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="blog-post.html">Blog Post</a>#}
-{#                             </li>#}
-{#                         </ul>#}
-{#                     </li>#}
-{#                     <li class="dropdown">#}
-{#                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>#}
-{#                         <ul class="dropdown-menu">#}
-{#                             <li>#}
-{#                                 <a href="full-width.html">Full Width Page</a>#}
-{#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="sidebar.html">Sidebar Page</a>#}
-{#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="faq.html">FAQ</a>#}
-{#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="404.html">404</a>#}
-{#                             </li>#}
-{#                             <li>#}
-{#                                 <a href="pricing.html">Pricing Table</a>#}
-{#                             </li>#}
-{#                         </ul>#}
-{#                     </li>#}
-{#                 </ul>#}
-{#             </div>#}
+{# 		                    <li>#}
+{# 				            	<form class="navbar-form" role="search">#}
+{# 									<div class="input-group">#}
+{# 										<input type="text" class="form-control" placeholder="Search">#}
+{# 										<span class="input-group-btn">#}
+{# 											<button type="submit" class="btn btn-default">#}
+{# 												<span class="glyphicon glyphicon-search">#}
+{# 													<span class="sr-only">Search</span>#}
+{# 												</span>#}
+{# 											</button>#}
+{# 										</span>#}
+{# 									</div>#}
+{# 								</form>#}
+{# 		                    </li>#}
+                        </ul>
+                    </li>
+                </ul>
+            </div>            
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-    </nav>
+     </nav>
 
     <!-- Page Content -->
     <div class="container">
@@ -127,16 +105,13 @@
                 <h1 class="page-header">{% block container_title %}{{ 'Welcome to elasticms'|trans }}{% endblock %}
                     <small>{% block container_sub_title %}{{ 'this is not a cms'|trans }}{% endblock %}</small>
                 </h1>
-{#                 <ol class="breadcrumb">#}
-{#                     <li><a href="index.html">Home</a>#}
-{#                     </li>#}
-{#                     <li class="active">About</li>#}
-{#                 </ol>#}
+                {% block breadcrumb %}{% endblock %}
             </div>
         </div>
         
-
+        <div class="row">
         {% block body %}{% endblock %}
+        </div>
 
         <hr>
         <!-- Footer -->
@@ -159,6 +134,8 @@
 
 
     <script src="{{ asset('bower/matchHeight/dist/jquery.matchHeight-min.js') }}"></script>
+    
+    <script src="{{ asset('scripts/template.js') }}"></script>
     
     
     {% block javascripts %}{% endblock %}

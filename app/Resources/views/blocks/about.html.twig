@@ -1,0 +1,24 @@
+<div class="col-md-6 hidden-xs hidden-sm">
+	<img class="img-responsive"
+		src="{{ path('download', {
+		    sha1: block.image.sha1,
+		    mimetype: block.image.mimetype|e('url'),
+		    filename: block.image.filename,
+		}) }}"
+		alt="{{ attribute(block, 'image_alt_'~app.request.locale ) }}">
+</div>
+
+<div class="col-sm-12 hidden-md hidden-lg">
+	<img class="img-responsive"
+		src="{{ path('download', {
+		    sha1: block.image_sm.sha1,
+		    mimetype: block.image_sm.mimetype|e('url'),
+		    filename: block.image_sm.filename,
+		}) }}"
+		alt="{{ attribute(block, 'image_alt_'~app.request.locale ) }}">
+</div>
+
+<div class="col-md-6">
+	<h2>{{ attribute(block, 'title_'~app.request.locale )  }}</h2>
+    {{ attribute(block, 'body_'~app.request.locale )|internal_links|raw  }}
+</div>

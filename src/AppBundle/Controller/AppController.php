@@ -21,8 +21,4 @@ class AppController extends Controller
 	public function getClient(){
 		return $this->get('app.elasticsearch');
 	}
-	
-	public function getIndex() {
-		return 'emseu_preview';
-	}
 }

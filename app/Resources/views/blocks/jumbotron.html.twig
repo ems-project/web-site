@@ -1,0 +1,4 @@
+<div class="jumbotron">
+  <h1>{{ attribute(block, 'title_'~app.request.locale )  }}</h1>
+  {{ attribute(block, 'body_'~app.request.locale )|internal_links|raw  }}
+</div>

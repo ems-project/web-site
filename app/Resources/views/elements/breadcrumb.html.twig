@@ -1,0 +1,15 @@
+
+
+<ol class="breadcrumb">
+	<li>{% include 'elements/page_link.html.twig' with {'page': 'home'|page} %}</li>
+    {% set foo = app.request.pathinfo|split('/') %}
+    {% if foo|length > 2 %}
+	    {% for i in 1..(foo|length-2) %}
+	        {% set parent = foo|slice(1,i)|join('/')|page_by_slug %}
+	        {% if parent %}
+				<li class="">{% include 'elements/page_link.html.twig' with {'page': parent} %}</li>
+	        {% endif %}
+	    {% endfor %}    
+	{% endif %}
+	<li class="active">{{ title }}</li>
+</ol>

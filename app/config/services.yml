@@ -10,4 +10,9 @@ services:
         arguments: ["%elasticsearch_cluster%"]
     app.data:
         class: AppBundle\Service\DataService
-        arguments: ["@app.elasticsearch"]
+        arguments: ["@app.elasticsearch", "@request_stack"]
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        arguments: [ '@app.data', '@router', '@twig', "@request_stack"]
+        tags:
+            - { name: twig.extension, priority: -2000 }

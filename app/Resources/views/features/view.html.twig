@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %} 
+
+
+{% block container_title %}{{ 'Features'|trans }}{% endblock %}
+{% block container_sub_title %}{{ 'all you can expect'|trans }}{% endblock %}
+{% block breadcrumb %}
+	{% include 'elements/breadcrumb.html.twig' with {'title': attribute(data, 'short_title_'~app.request.locale )} %}
+{% endblock %}
+
+{% block body %}
+	<!-- Content Row -->
+	<div class="row">
+		<!-- Content Column -->
+		<div class="col-md-9">
+			<h2><i class="{{ data.icon }}" aria-hidden="true"></i> {{ attribute(data, 'title_'~app.request.locale ) }}</h2>
+			{{ attribute(data, 'teaser_'~app.request.locale )|raw }}
+			<hr>
+			<div class="row">
+				<div class="col-md-9">
+					{% if attribute(data, 'body_'~app.request.locale ) is defined %}
+						{{ attribute(data, 'body_'~app.request.locale )|raw }}
+					{% else %}
+						{{ 'Documentation in progress...' }}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<!-- Sidebar Column -->
+		<div class="col-md-3">
+    		{{ render(controller(
+                'AppBundle:Default:listFeatures', {'slug' : data.slug}
+            )) }}
+		</div>
+	</div>
+	<!-- /.row -->
+{% endblock %}

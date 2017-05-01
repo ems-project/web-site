@@ -3,6 +3,8 @@
 namespace AppBundle\Service;
 
 use Elasticsearch\Client;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * DataService.
@@ -12,14 +14,17 @@ class DataService
 {	
 	/**@var Client */
 	private $client;
-
 	
-	function __construct(Client $client) {
+	/**@var RequestStack*/
+	protected $requestStack;
+	
+	function __construct(Client $client, RequestStack $requestStack) {
 		$this->client = $client;
+		$this->requestStack = $requestStack;
 	}
 	
 	
-	public function getFeatures($index){
+	public function getFeatures(){
 		
 		$body = '{
 			   "query": {
@@ -47,13 +52,88 @@ class DataService
 		return $this->client->search([
 			'size' => 100,
 			'type' => 'feature',
-			'index' => $index,
+			'index' => $this->getIndex(),
 			'body' => $body,
 		]);
 	}
 	
 	
-	public function getDataBySlug($index, $type, $slug){
+	
+	
+	public function getTemplates(){
+		
+		$body = '{
+				"sort": {
+			      "short_title_'.$this->requestStack->getCurrentRequest()->getLocale().'.raw": {
+			         "order": "asc",
+			         "missing": "_last"
+			      }
+			   }
+			}';
+		
+		dump($body);
+		
+		return $this->client->search([
+				'size' => 100,
+				'type' => 'template',
+				'index' => $this->getIndex(),
+				'body' => $body,
+		]);
+	}
+	
+	public function getByOuuid($type, $ouuid) {
+		try {
+			$result = $this->client->get([
+					'id' => $ouuid,
+					'index' => $this->getIndex(),
+					'type' => $type,
+			]);		
+			return $result['_source'];
+		}
+		catch (\Exception $e) {
+			throw new NotFoundHttpException($type.' not found');
+		}
+	}
+	
+	public function getDataById($type, $id){
+		
+		$body = '{
+			   "query": {
+			      "bool": {
+			         "must": [
+			            {
+			               "term": {
+			                  "id": {
+			                     "value": '.json_encode($id).',
+			                     "boost": 1
+			                  }
+			               }
+			            }
+			         ]
+			      }
+			   }
+			}';
+		
+		$data = $this->client->search([
+				'size' => 1,
+				'type' => $type,
+				'index' => $this->getIndex(),
+				'body' => $body,
+		]);
+		
+		if($data['hits']['total'] != 1){
+			throw new NotFoundHttpException($type.' not found');
+		}
+		
+		return $data['hits']['hits'][0]['_source'];
+	}
+	
+	public function getIndex() {
+// 		dump($this->requestStack->getCurrentRequest()->getHost());
+		return 'emseu_preview';
+	}
+	
+	public function getDataBySlug($type, $slug){
 		
 		$body = '{
 			   "query": {
@@ -72,12 +152,18 @@ class DataService
 			   }
 			}';
 		
-		return $this->client->search([
-			'size' => 1,
-			'type' => $type,
-			'index' => $index,
-			'body' => $body,
+		$data = $this->client->search([
+				'size' => 1,
+				'type' => $type,
+				'index' => $this->getIndex(),
+				'body' => $body,
 		]);
+		
+		if($data['hits']['total'] != 1){
+			throw new NotFoundHttpException($type.' not found');
+		}
+		
+		return $data['hits']['hits'][0]['_source'];
 	}
 	
 	

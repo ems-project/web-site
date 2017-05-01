@@ -1,0 +1,11 @@
+
+<div class="list-group">
+	{% for template in templates.hits.hits %}
+    	<a href="{{ path('doc.templates.view', {'slug': template._source.slug}) }}" class="list-group-item{% if slug is defined and template._source.slug == slug %} active{% endif %}">
+    		<i class="fa fa-edit" aria-hidden="true" aria-labelledby="feature_{{ loop.index }}"></i> 
+    		<span id="feature_{{ loop.index }}">
+    		    {{ attribute(template._source, 'short_title_'~app.request.locale ) }}
+    		</span>
+    	</a>
+	{% endfor %}
+</div>

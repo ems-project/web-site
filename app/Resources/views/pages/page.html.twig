@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}{{ attribute(page, 'title_'~app.request.locale ) }}{% endblock %}
+{% block container_title %}{{ attribute(page, 'title_'~app.request.locale ) }}{% endblock %}
+{% block container_sub_title %}{{ attribute(page, 'teaser_'~app.request.locale ) }}{% endblock %}
+
+{% block breadcrumb %}
+    {% if page.id != 'home' %}
+	    {% include 'elements/breadcrumb.html.twig' with {'title': attribute(page, 'short_title_'~app.request.locale )} %}
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	{% include 'blocks/render.html.twig' with {'page': page} %}
+{% endblock %}

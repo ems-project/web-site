@@ -22,6 +22,7 @@
     "tests"
   ],
   "dependencies": {
-    "startbootstrap-modern-business": "blackrockdigital/startbootstrap-modern-business#^3.3.7"
+    "startbootstrap-modern-business": "blackrockdigital/startbootstrap-modern-business#^3.3.7",
+    "reveal.js": "hakimel/reveal.js#^3.4.1"
   }
 }
