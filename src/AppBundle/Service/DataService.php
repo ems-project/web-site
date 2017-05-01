@@ -18,9 +18,10 @@ class DataService
 	/**@var RequestStack*/
 	protected $requestStack;
 	
-	function __construct(Client $client, RequestStack $requestStack) {
+	function __construct(Client $client, RequestStack $requestStack, $indexPrefix) {
 		$this->client = $client;
 		$this->requestStack = $requestStack;
+		$this->indexPrefix = $indexPrefix;
 	}
 	
 	
@@ -127,8 +128,12 @@ class DataService
 	}
 	
 	public function getIndex() {
-// 		dump($this->requestStack->getCurrentRequest()->getHost());
-		return 'emseu_preview';
+		return $this->indexPrefix.$this->getContext();
+	}
+	
+	public function getContext() {
+		// 		dump($this->requestStack->getCurrentRequest()->getHost());
+		return 'preview';
 	}
 	
 	public function getDataBySlug($type, $slug){

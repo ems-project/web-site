@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% trans_default_domain domain() %}<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}{{ 'Welcome to elasticms'|trans }}{% endblock %}{{ ' | elasticms.eu'|trans }}</title>
+    <title>{% block title %}{{ 'Welcome to elasticms'|trans }}{% endblock %}{{ 'site.title_tail'|trans }}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('bower/startbootstrap-modern-business/css/bootstrap.min.css') }}" rel="stylesheet">

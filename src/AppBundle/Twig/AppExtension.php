@@ -36,6 +36,12 @@ class AppExtension extends \Twig_Extension
 				new \Twig_SimpleFilter('page_by_slug', array($this, 'page_by_slug')),
 		);
 	}
+	
+	public function getFunctions() {
+		return array(
+				new \Twig_SimpleFunction('domain', array($this, 'domain')),
+		);
+	}
 
 	function internalLinks($input) {
 		$out = $input;
@@ -68,11 +74,15 @@ class AppExtension extends \Twig_Extension
 	
 	function page($id) {
 		try {
-			return $this->data->getDataById('page', $id);		
+			return $this->data->getDataById('page', $id);
 		}
 		catch (NotFoundHttpException $e){
-			return false;			
+			return false;
 		}
+	}
+	
+	function domain() {
+		return $this->data->getContext();
 	}
 	
 	function page_by_slug($slug) {

@@ -10,9 +10,14 @@ services:
         arguments: ["%elasticsearch_cluster%"]
     app.data:
         class: AppBundle\Service\DataService
-        arguments: ["@app.elasticsearch", "@request_stack"]
+        arguments: ["@app.elasticsearch", "@request_stack", "%index_prefix%"]
     app.twig_extension:
         class: AppBundle\Twig\AppExtension
         arguments: [ '@app.data', '@router', '@twig', "@request_stack"]
         tags:
             - { name: twig.extension, priority: -2000 }
+    app.translation.elastic_loader:
+        class: AppBundle\Translation\ElasticLoader
+        arguments: ["@app.elasticsearch", "translation", "%index_prefix%" ]
+        tags:
+            - { name: translation.loader, alias: bin }

@@ -20,3 +20,4 @@ parameters:
     
     storage_path: /opt/web/sites/elasticms.eu/var/assets
     elasticsearch_cluster: ['http://localhost:9200','http://localhost:9201'] 
+    index_prefix: emseu_ 
