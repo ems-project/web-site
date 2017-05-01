@@ -1,4 +1,4 @@
-
+{% trans_default_domain domain() %}
 <div class="list-group">
 	{% for feature in features.hits.hits %}
 		<a href="{{ path('feature', {'slug': feature._source.slug}) }}" class="list-group-item {% if slug is defined and feature._source.slug == slug %}active{% endif %}">

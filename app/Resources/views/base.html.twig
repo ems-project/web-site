@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}{{ 'Welcome to elasticms'|trans }}{% endblock %}{{ 'site.title_tail'|trans }}</title>
+    <title>{% block title %}{{ ''|trans }}{% endblock %} {{ 'site.title_tail'|trans }}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('bower/startbootstrap-modern-business/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -40,33 +40,34 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">{{ 'Toggle navigation'|trans }}</span>
+                    <span class="sr-only">{{ 'site.toggle_navigation'|trans }}</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('page', {slug: 'home'}) }}"><i class="ems-icon-ball"></i> {{ 'elastic<b>ms</b>'|trans|raw }}</a>
+                <a class="navbar-brand" href="{{ path('page', {slug: 'home'}) }}"><i class="ems-icon-ball"></i> {{ 'site.name'|trans|raw }}</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="{% if app.request.attributes.get('_route') starts with 'concept' %}active{% endif %}">
-                        <a href="{{ path('page', {slug: 'concept'}) }}">Concept</a>
+                    	{% include 'elements/page_link.html.twig' with {'page': 'concept'|page} %}
                     </li>
                     <li class="{% if app.request.attributes.get('_route') starts with 'feature' %}active{% endif %}">
                         <a href="{{ path('page', {slug: 'features'}) }}">Features</a>
                     </li>
+                    {% set docPage = 'doc'|page %}
                     <li class="dropdown {% if app.request.attributes.get('_route') starts with 'doc' %}active{% endif %}">
-                        <a href="{{ path('page', {slug: 'doc'}) }}" class="dropdown-toggle" data-toggle="dropdown">{{ 'Documentation'|trans }} <b class="caret"></b></a>
+                        <a href="{{ path('page', {slug: docPage.slug}) }}" class="dropdown-toggle" data-toggle="dropdown">{{ attribute(docPage, 'short_title_'~app.request.locale ) }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ path('page', {slug: 'doc'}) }}">{{ 'Introduction'|trans }}</a>
+                                <a href="{{ path('page', {slug: 'doc'}) }}">{{ 'documentation.menu.alias'|trans }}</a>
                             </li>
 {#                             <li>#}
 {#                                 <a href="#">{{ 'How-To guides'|trans }}</a>#}
 {#                             </li>#}
                             <li>
-                                <a href="{{ path('page', {slug: 'doc/templates'}) }}">{{ 'Templates'|trans }}</a>
+                                {% include 'elements/page_link.html.twig' with {'page': 'templates'|page} %}
                             </li>
 {#                             <li>#}
 {#                                 <a href="#">{{ 'Twig\'s extensions'|trans }}</a>#}
@@ -102,7 +103,7 @@
 		<!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">{% block container_title %}{{ 'Welcome to elasticms'|trans }}{% endblock %}
+                <h1 class="page-header">{% block container_title %}{{ 'site.welcome'|trans }}{% endblock %}
                     <small>{% block container_sub_title %}{{ 'this is not a cms'|trans }}{% endblock %}</small>
                 </h1>
                 {% block breadcrumb %}{% endblock %}
@@ -118,7 +119,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; elasticms.eu {{ "now"|date("Y") }}</p>
+                    <p>{{ 'site.copy'|trans({'%year%': "now"|date("Y")}) }}</p>
                 </div>
             </div>
         </footer>

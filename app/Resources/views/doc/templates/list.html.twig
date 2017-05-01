@@ -1,4 +1,4 @@
-
+{% trans_default_domain domain() %}
 <div class="list-group">
 	{% for template in templates.hits.hits %}
     	<a href="{{ path('doc.templates.view', {'slug': template._source.slug}) }}" class="list-group-item{% if slug is defined and template._source.slug == slug %} active{% endif %}">

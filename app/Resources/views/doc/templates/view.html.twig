@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %} 
+{% trans_default_domain domain() %}{% extends 'base.html.twig' %} 
 
 
 {% block container_title %}{{ attribute(data, 'title_'~app.request.locale ) }}{% endblock %}
@@ -20,7 +20,7 @@
 					{% if attribute(data, 'body_'~app.request.locale ) is defined %}
 						{{ attribute(data, 'body_'~app.request.locale )|raw }}
 					{% else %}
-						{{ 'Documentation in progress...' }}
+						{{ 'site.documentation_in_progress'|trans }}
 					{% endif %}
 				</div>
 			</div>

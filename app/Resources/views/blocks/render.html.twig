@@ -1,4 +1,4 @@
-
+{% trans_default_domain domain() %}
 
 {% for block in attribute(page, 'blocks_'~app.request.locale ) %}
 	<div class="{{ block.class }}">

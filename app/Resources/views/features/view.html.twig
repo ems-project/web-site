@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %} 
+{% trans_default_domain domain() %}{% extends 'base.html.twig' %} 
 
-
-{% block container_title %}{{ 'Features'|trans }}{% endblock %}
-{% block container_sub_title %}{{ 'all you can expect'|trans }}{% endblock %}
+{% set features = 'features'|page %}
+{% block title %}{{ attribute(data, 'short_title_'~app.request.locale ) }}{% endblock %}
+{% block container_title %}{{ attribute(features, 'title_'~app.request.locale ) }}{% endblock %}
+{% block container_sub_title %}{{ attribute(features, 'teaser_'~app.request.locale ) }}{% endblock %}
 {% block breadcrumb %}
 	{% include 'elements/breadcrumb.html.twig' with {'title': attribute(data, 'short_title_'~app.request.locale )} %}
 {% endblock %}

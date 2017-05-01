@@ -1,1 +1,1 @@
-<a href="{{ path('page', {slug: page.slug}) }}">{{ attribute(page, 'short_title_'~app.request.locale ) }}</a>
+{% trans_default_domain domain() %}<a href="{{ path('page', {slug: page.slug}) }}">{{ attribute(page, 'short_title_'~app.request.locale ) }}</a>

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %} 
+{% trans_default_domain domain() %}{% extends 'base.html.twig' %} 
 
 {% block title %}{{ attribute(page, 'title_'~app.request.locale ) }}{% endblock %}
 {% block container_title %}{{ attribute(page, 'title_'~app.request.locale ) }}{% endblock %}
