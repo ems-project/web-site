@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends AppController
 {
@@ -58,10 +59,34 @@ class DefaultController extends AppController
      * @Route("/downloads/{sha1}/{mimetype}/{filename}", name="download")
      */
     public function downloadAction($sha1, $mimetype, $filename, Request $request) {
+    	
+    	$existInBrowser= $request->headers->get('if-modified-since', false);
+    	if($existInBrowser){
+    		//http://stackoverflow.com/questions/10847157/handling-if-modified-since-header-in-a-php-script
+    		$response = new Response();
+    		$response->setNotModified();
+    		return $response;
+    	}
+    	
     	$path = $this->getParameter('storage_path').'/'.substr($sha1, 0, 3).'/'.$sha1;
     	$response = new BinaryFileResponse($path);
     	$response->headers->set('Content-Type', $mimetype);
     	$response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, $filename);
+    	
+    	
+    	$date = new \DateTime();
+    	$date->setTimestamp(filemtime($path));
+    	// Set cache settings in one call
+    	$response->setCache(array(
+    			'etag'          => $sha1,
+    			'last_modified' => $date,
+    			'max_age'       => 10,
+    			's_maxage'      => 10,
+    			'public'        => true,
+    			// 'private'    => true,
+    	));
+//     	$response->setSharedMaxAge(3600);
+    	
     	return $response;
     }
 }
