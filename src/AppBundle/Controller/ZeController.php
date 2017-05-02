@@ -16,11 +16,11 @@ class ZeController extends AppController
     {
     	if($_locale != 'en' and $_locale != ""){
     		return $this->render('pages/missing.html.twig', [
-    				'page' => $this->getDataService()->getDataBySlug('page', $slug),
+    				'data' => $this->getDataService()->getDataBySlug('page', $slug),
     		]);
     	}
     	return $this->render('pages/page.html.twig', [
-    			'page' => $this->getDataService()->getDataBySlug('page', $slug),
+    			'data' => $this->getDataService()->getDataBySlug('page', $slug),
         ]);
     }
 }
