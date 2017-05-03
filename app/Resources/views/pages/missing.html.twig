@@ -11,7 +11,7 @@
 	<div class="col-md-12">
 		<ul>
 			{% for locale in locales %}
-                {% if app.request.locale != locale %}
+                {% if app.request.locale != locale and attribute(data, 'available_'~locale) is defined and attribute(data, 'available_'~locale) %}
     				<li>
         				<a href="{{ url(app.request.attributes.get('_route'), app.request.query.all|merge(app.request.attributes.get('_route_params'))|merge({_locale: locale})) }}">
         				    {{ 'site.locale.page_exists_in'|trans({ '%locale%': ('site.locale.current.'~locale)|trans }) }}
