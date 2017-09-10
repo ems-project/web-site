@@ -40,9 +40,21 @@ class AppExtension extends \Twig_Extension
 	public function getFunctions() {
 		return array(
 				new \Twig_SimpleFunction('domain', array($this, 'domain')),
+				new \Twig_SimpleFunction('data', array($this, 'data')),
+				new \Twig_SimpleFunction('i18n', array($this, 'i18n')),
 		);
 	}
-
+	
+	function i18n($object, $key){
+		if(isset($object[$key.'_'.$this->requestStack->getCurrentRequest()->getLocale()])){
+			return $object[$key.'_'.$this->requestStack->getCurrentRequest()->getLocale()];
+		}
+		return $object[$key.'_en'];
+	}
+	function data($type, $key){
+		return $this->data->getByOuuid($type, $key);
+	}
+	
 	function internalLinks($input) {
 		$out = $input;
 		
