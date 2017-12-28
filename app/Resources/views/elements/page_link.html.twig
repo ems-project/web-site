@@ -1,1 +1,0 @@
-{% trans_default_domain domain() %}<a href="{{ path('page', {slug: page.slug}) }}">{% if attribute(page, 'short_title_'~app.request.locale ) %}{{ attribute(page, 'short_title_'~app.request.locale ) }}{% else %}{{page.id}}{% endif %}</a>
