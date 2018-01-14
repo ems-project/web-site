@@ -1,0 +1,8 @@
+{% trans_default_domain prefix~app.request.get('_environment') %}
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">{{ 'elements.footer.copyright'|trans({'%year%':(date('now')|date('elements.footer.copyrigtht.date_format'|trans))}) }}</p>
+  </div>
+  <!-- /.container -->
+</footer>
