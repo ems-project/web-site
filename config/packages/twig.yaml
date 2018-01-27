@@ -3,5 +3,5 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        prefix: 'website_'
+        prefix: '%app.instance_id%'
         
