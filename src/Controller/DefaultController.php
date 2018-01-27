@@ -1,12 +1,14 @@
 <?php 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Service\DataService;
 
 class DefaultController extends Controller
 {
+	
 	/**
 	 * @Route("/", name="homepage")
 	 * @return \Symfony\Component\HttpFoundation\Response
@@ -18,16 +20,23 @@ class DefaultController extends Controller
     }
     
     
+    public function menu(DataService $dataService)
+    {
+    	return $this->render('pages/page.html.twig', array(
+    			'page' => $dataService->getPageByUrl($token),
+    	));
+    }
+    
     
     
     /**
      * @Route("/{token}", name="page", requirements={"token"=".+"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function page()
+    public function page($token, DataService $dataService)
     {
-    	
     	return $this->render('pages/page.html.twig', array(
+    			'page' => $dataService->getPageByUrl($token),
     	));
     }
 }
