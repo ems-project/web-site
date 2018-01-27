@@ -14,6 +14,8 @@ class DataService
 	private $clientRequest;
 	
 	const PAGE_TYPE = 'page';
+	const MENU_ROOT_OUUID = 'menu:AVyOS1UYRVjjhImjKEIW';
+	const MENU_CHILDREN_KEY = 'children';
 	
 	
 	/**
@@ -22,6 +24,13 @@ class DataService
 	 */
 	public function __construct(ClientRequest $clientRequest) {
 		$this->clientRequest = $clientRequest;
+	}
+	
+	/**
+	 * Get the menu structure
+	 */
+	public function getMenu($depth) {
+		return $this->clientRequest->getHierarchy(self::MENU_ROOT_OUUID, self::MENU_CHILDREN_KEY, $depth);
 	}
 	
 	/**

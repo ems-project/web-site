@@ -12,7 +12,10 @@
     <body>
    
         <!-- Navigation -->
-        {{ include('elements/navbar.html.twig') }}
+        {{ render(controller(
+            'App\\Controller\\DefaultController::menu',
+            { 'depth': 2 }
+        )) }}
         
         <!-- Page Content -->
         {% block body %}

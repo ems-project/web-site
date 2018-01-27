@@ -20,10 +20,10 @@ class DefaultController extends Controller
     }
     
     
-    public function menu(DataService $dataService)
+    public function menu($depth, DataService $dataService)
     {
-    	return $this->render('pages/page.html.twig', array(
-    			'page' => $dataService->getPageByUrl($token),
+    	return $this->render('elements/navbar.html.twig', array(
+    			'menu' => $dataService->getMenu($depth),
     	));
     }
     
