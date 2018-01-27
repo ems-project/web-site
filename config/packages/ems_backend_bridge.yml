@@ -7,6 +7,8 @@ parameters:
     app.preview.index: '%env(PREVIEW_INDEX)%'
     env(PREVIEW_REGEX): /preview/
     app.preview.regex: '%env(PREVIEW_REGEX)%'
+    env(INSTANCE_ID): ems_
+    app.instance_id: '%env(INSTANCE_ID)%'
     
 
 ems_backend_bridge:
@@ -19,8 +21,8 @@ ems_backend_bridge:
            index: '%app.live.index%'
     elasticms:
         website:
-            cluster: '%env(json:ELASTICSEARCH_CLUSTER)%'
-            index_prefix: 'ems_'
+            cluster: '%app.elasticsearch.cluster%'
+            index_prefix: '%app.instance_id%'
             translation_type: 'translation'
     clear_cache: website
         
