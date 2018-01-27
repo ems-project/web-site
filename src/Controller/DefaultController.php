@@ -16,4 +16,18 @@ class DefaultController extends Controller
         return $this->render('pages/homepage.html.twig', array(
         ));
     }
+    
+    
+    
+    
+    /**
+     * @Route("/{token}", name="page", requirements={"token"=".+"})
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function page()
+    {
+    	
+    	return $this->render('pages/page.html.twig', array(
+    	));
+    }
 }
