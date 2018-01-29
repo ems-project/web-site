@@ -4,52 +4,52 @@
     {% if attribute(menu.source, 'short_title_'~app.request.locale) is defined %}
   		<a class="navbar-brand" href="{{ path('homepage') }}"><i class="fa fa-users"></i> {{ attribute(menu.source, 'short_title_'~app.request.locale)|raw }}</a>
   	{% endif %}
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="{{ 'elements.navbar.toggle_navigation.aria'|trans }}">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="{{ 'elements.navbar.toggle_navigation.aria'|trans }}">
+    	<span class="navbar-toggler-icon"></span>
+  	</button>
 
-  <div class="collapse navbar-collapse" id="navbarsDefault">
-    <ul class="navbar-nav mr-auto">
-    	{% for item in menu.children %}
-    		{% set title = false %}
-            {% if attribute(item.source, 'short_title_'~app.request.locale) is defined %}
-    		    {% set title = attribute(item.source, 'short_title_'~app.request.locale) %}
-            {% elseif attribute(item.source, 'title_'~app.request.locale) is defined %}
-    		    {% set title = attribute(item.source, 'title_'~app.request.locale) %}
-        	{% endif %}
-        	{% if title %}
-    			{% if item.children|length %}
-    				<li class="nav-item dropdown">
-    					<a class="nav-link dropdown-toggle" href="{{ 'object:'~item.key }}" id="{{ item.key }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    						{{ title }}
-    					</a>
-    					<div class="dropdown-menu" aria-labelledby="{{ item.key }}">
-							{% for menuItem in item.children %}
-                        		{% set subtitle = false %}
-                                {% if attribute(menuItem.source, 'short_title_'~app.request.locale) is defined %}
-                        		    {% set subtitle = attribute(menuItem.source, 'short_title_'~app.request.locale) %}
-                                {% elseif attribute(menuItem.source, 'title_'~app.request.locale) is defined %}
-                        		    {% set subtitle = attribute(menuItem.source, 'title_'~app.request.locale) %}
-                            	{% endif %}
-                            	{% if subtitle %}
-									<a class="dropdown-item" href="{{ 'object:'~item.key }}">{{ subtitle }}</a>
-								{% endif %}
-							{% endfor %}
-    					</div>
-    				</li>
-    			{% else %}
-            		<li class="nav-item">
-            			<a class="nav-link" href="{{ 'object:'~item.key }}"> 
-            				{{ title }}
-                        </a>
-            		</li>
-                {% endif %}
-    		{% endif %}
-    	{% endfor %}
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
+  	<div class="collapse navbar-collapse" id="navbarsDefault">
+        <ul class="navbar-nav mr-auto">
+        	{% for item in menu.children %}
+        		{% set title = false %}
+                {% if attribute(item.source, 'short_title_'~app.request.locale) is defined %}
+        		    {% set title = attribute(item.source, 'short_title_'~app.request.locale) %}
+                {% elseif attribute(item.source, 'title_'~app.request.locale) is defined %}
+        		    {% set title = attribute(item.source, 'title_'~app.request.locale) %}
+            	{% endif %}
+            	{% if title %}
+        			{% if item.children|length %}
+        				<li class="nav-item dropdown">
+        					<a class="nav-link dropdown-toggle" href="{{ 'object:'~item.key }}" id="{{ item.key }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        						{{ title }}
+        					</a>
+        					<div class="dropdown-menu" aria-labelledby="{{ item.key }}">
+    							{% for menuItem in item.children %}
+                            		{% set subtitle = false %}
+                                    {% if attribute(menuItem.source, 'short_title_'~app.request.locale) is defined %}
+                            		    {% set subtitle = attribute(menuItem.source, 'short_title_'~app.request.locale) %}
+                                    {% elseif attribute(menuItem.source, 'title_'~app.request.locale) is defined %}
+                            		    {% set subtitle = attribute(menuItem.source, 'title_'~app.request.locale) %}
+                                	{% endif %}
+                                	{% if subtitle %}
+    									<a class="dropdown-item" href="{{ 'object:'~item.key }}">{{ subtitle }}</a>
+    								{% endif %}
+    							{% endfor %}
+        					</div>
+        				</li>
+        			{% else %}
+                		<li class="nav-item">
+                			<a class="nav-link" href="{{ 'object:'~item.key }}"> 
+                				{{ title }}
+                            </a>
+                		</li>
+                    {% endif %}
+        		{% endif %}
+        	{% endfor %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+  	</div>
 </nav>
